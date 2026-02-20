@@ -6,6 +6,7 @@
   },
   "dependencies": {
     "@emotion/is-prop-valid": "latest",
+    "@radix-ui/react-slot": "^1.2.4",
     "@react-three/drei": "^9.88.13",
     "@react-three/fiber": "^8.15.11",
     "animejs": "^3.2.1",
