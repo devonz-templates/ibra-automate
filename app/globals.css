@@ -4,12 +4,24 @@
 
 :root {
   --primary: 252 82 255; /* Neon purple */
+  --primary-foreground: 255 255 255;
   --secondary: 0 225 244; /* Cyan */
+  --secondary-foreground: 255 255 255;
   --accent: 255 184 0; /* Gold */
+  --accent-foreground: 0 0 0;
   --background: 10 10 15; /* Dark background */
   --foreground: 240 240 250; /* Light text */
   --card: 20 20 30; /* Slightly lighter than background */
   --card-foreground: 240 240 250; /* Same as foreground */
+  --border: 40 40 60;
+  --input: 40 40 60;
+  --ring: 252 82 255;
+  --destructive: 239 68 68;
+  --destructive-foreground: 255 255 255;
+  --muted: 30 30 45;
+  --muted-foreground: 160 160 180;
+  --popover: 20 20 30;
+  --popover-foreground: 240 240 250;
   --glass-bg: rgba(30, 30, 40, 0.6);
   --glass-border: rgba(255, 255, 255, 0.1);
   --neomorphic-shadow-1: rgba(0, 0, 0, 0.5);

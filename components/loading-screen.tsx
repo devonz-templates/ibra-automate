@@ -98,23 +98,29 @@ export default function LoadingScreen() {
         >
           {/* Animated particles */}
           <div className="absolute inset-0 overflow-hidden">
-            {Array.from({ length: 20 }).map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute w-2 h-2 rounded-full"
-                style={{
-                  background: Math.random() > 0.5 ? "#fc52ff" : "#00e1f4",
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
-                }}
-                variants={particleVariants}
-                animate="animate"
-                transition={{
-                  delay: Math.random() * 2,
-                  duration: 2 + Math.random() * 2,
-                }}
-              />
-            ))}
+            {Array.from({ length: 20 }).map((_, i) => {
+              // Deterministic positions to avoid hydration mismatch
+              const colors = ["#fc52ff", "#00e1f4"]
+              const left = ((i * 37 + 13) % 100)
+              const top = ((i * 53 + 7) % 100)
+              return (
+                <motion.div
+                  key={i}
+                  className="absolute w-2 h-2 rounded-full"
+                  style={{
+                    background: colors[i % 2],
+                    left: `${left}%`,
+                    top: `${top}%`,
+                  }}
+                  variants={particleVariants}
+                  animate="animate"
+                  transition={{
+                    delay: (i * 0.1) % 2,
+                    duration: 2 + (i % 3),
+                  }}
+                />
+              )
+            })}
           </div>
 
           <div className="flex flex-col items-center justify-center z-10 relative">

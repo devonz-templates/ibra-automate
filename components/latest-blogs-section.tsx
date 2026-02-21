@@ -69,7 +69,7 @@ export default function LatestBlogsSection() {
   ]
 
   return (
-    <section className="py-20 relative overflow-hidden">
+    <section id="blog" className="py-20 relative overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-gradient-to-br from-purple-900/10 via-transparent to-cyan-900/10" />
       <div className="absolute top-1/3 right-1/4 w-64 h-64 bg-purple-500/5 rounded-full blur-3xl" />
@@ -105,7 +105,11 @@ export default function LatestBlogsSection() {
                   <CardContent className="p-6 flex flex-col h-full">
                     <Badge
                       variant="secondary"
-                      className={`bg-${post.category.color}-500/20 text-${post.category.color}-300 border-${post.category.color}-500/30 self-start mb-4`}
+                      className={`${{
+                        purple: "bg-purple-500/20 text-purple-300 border-purple-500/30",
+                        cyan: "bg-cyan-500/20 text-cyan-300 border-cyan-500/30",
+                        red: "bg-red-500/20 text-red-300 border-red-500/30",
+                      }[post.category.color] || "bg-gray-500/20 text-gray-300 border-gray-500/30"} self-start mb-4`}
                     >
                       {post.category.icon}
                       {post.category.name}

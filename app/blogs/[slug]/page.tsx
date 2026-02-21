@@ -373,7 +373,11 @@ export default function BlogPost() {
                     <Badge
                       key={index}
                       variant="secondary"
-                      className={`bg-${tag.color}-500/20 text-${tag.color}-300 border-${tag.color}-500/30`}
+                      className={`${{
+                        purple: "bg-purple-500/20 text-purple-300 border-purple-500/30",
+                        cyan: "bg-cyan-500/20 text-cyan-300 border-cyan-500/30",
+                        red: "bg-red-500/20 text-red-300 border-red-500/30",
+                      }[tag.color] || "bg-gray-500/20 text-gray-300 border-gray-500/30"}`}
                     >
                       {tag.icon}
                       {tag.name}

@@ -17,7 +17,7 @@ export default function GlobalBackground() {
     // Set canvas to full screen
     const setCanvasSize = () => {
       canvas.width = window.innerWidth
-      canvas.height = window.innerHeight * 3 // Make it taller to cover the entire page
+      canvas.height = window.innerHeight
     }
 
     setCanvasSize()

@@ -16,51 +16,21 @@ import GlobalBackground from "@/components/global-background"
 import SectionIndicators from "@/components/section-indicators"
 
 export default function Home() {
-  const [isLoaded, setIsLoaded] = useState(false)
-  const [isClient, setIsClient] = useState(false)
-
-  useEffect(() => {
-    // Mark that we're on the client side
-    setIsClient(true)
-
-    // Preload the avatar image
-    const avatarImage = new Image()
-    avatarImage.src = "/images/ibrahim-avatar.png"
-    avatarImage.onload = () => {
-      console.log("Avatar image loaded")
-    }
-
-    // Ensure all components are loaded before showing content
-    const timer = setTimeout(() => {
-      setIsLoaded(true)
-    }, 3000) // Wait for loading screen to complete
-
-    return () => clearTimeout(timer)
-  }, [])
-
-  // Don't render anything during SSR to avoid hydration issues
-  if (!isClient) {
-    return <div className="min-h-screen bg-[#0a0a0f]"></div>
-  }
-
   return (
     <main className="min-h-screen bg-[#0a0a0f] overflow-x-hidden">
       <GlobalBackground />
-      {isLoaded && (
-        <>
-          <FloatingSidebar />
-          <SectionIndicators />
-          <HeroSectionNew />
-          <AboutSection />
-          <ServicesSection />
-          <ProjectsSection />
-          <AIChatSection />
-          <LatestBlogsSection />
-          <ContactSection />
-          <Footer />
-          <ScrollAnimations />
-        </>
-      )}
+      <FloatingSidebar />
+      <SectionIndicators />
+      <HeroSectionNew />
+      <StatsSection />
+      <AboutSection />
+      <ServicesSection />
+      <ProjectsSection />
+      <AIChatSection />
+      <LatestBlogsSection />
+      <ContactSection />
+      <Footer />
+      <ScrollAnimations />
     </main>
   )
 }
