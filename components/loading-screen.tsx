@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import Image from "next/image"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion } from "framer-motion"
 
 export default function LoadingScreen() {
   const [loading, setLoading] = useState(true)
@@ -86,16 +86,16 @@ export default function LoadingScreen() {
     },
   }
 
+  // When loading finishes, this overlay becomes invisible and non-interactive
+  // Using CSS transitions instead of AnimatePresence for reliable unmounting
   return (
-    <AnimatePresence>
-      {loading && (
-        <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          exit="exit"
-        >
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black transition-opacity duration-500"
+      style={{
+        opacity: loading ? 1 : 0,
+        pointerEvents: loading ? "auto" : "none",
+      }}
+    >
           {/* Animated particles */}
           <div className="absolute inset-0 overflow-hidden">
             {Array.from({ length: 20 }).map((_, i) => {
@@ -185,8 +185,6 @@ export default function LoadingScreen() {
           {/* Background effects */}
           <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(var(--primary),0.1),transparent_70%)]" />
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-gradient-to-r from-primary/5 to-secondary/5 blur-3xl" />
-        </motion.div>
-      )}
-    </AnimatePresence>
+        </div>
   )
 }

@@ -28,5 +28,24 @@
     "postcss": "^8.5",
     "tailwindcss": "^3.4.19",
     "typescript": "^5"
-  }
+  },
+  "name": "ibra-automate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "postcss.config.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devonz-templates/ibra-automate.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/devonz-templates/ibra-automate/issues"
+  },
+  "homepage": "https://github.com/devonz-templates/ibra-automate#readme"
 }

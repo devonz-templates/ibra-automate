@@ -47,18 +47,15 @@ export default function FloatingSidebar() {
   return (
     <>
       {/* Desktop Navigation */}
-      <motion.div
+      <div
         className="hidden lg:block fixed z-50"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
       >
         <AnimatePresence mode="wait">
           {!scrolled ? (
             // Top Navigation Bar
             <motion.nav
               key="topnav"
-              initial={{ y: -100, opacity: 0 }}
+              initial={false}
               animate={{ y: 0, opacity: 1 }}
               exit={{
                 y: -50,
@@ -98,12 +95,7 @@ export default function FloatingSidebar() {
             // Side Navigation Bar - Fixed positioning for true center
             <motion.nav
               key="sidenav"
-              initial={{
-                x: -200,
-                y: -50,
-                scale: 0.8,
-                opacity: 0,
-              }}
+              initial={false}
               animate={{
                 x: 0,
                 y: 0,
@@ -183,14 +175,11 @@ export default function FloatingSidebar() {
             </motion.nav>
           )}
         </AnimatePresence>
-      </motion.div>
+      </div>
 
       {/* Mobile Navigation */}
-      <motion.div
+      <div
         className="lg:hidden fixed top-4 right-4 z-50"
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
       >
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -233,7 +222,7 @@ export default function FloatingSidebar() {
             </motion.div>
           )}
         </AnimatePresence>
-      </motion.div>
+      </div>
     </>
   )
 }

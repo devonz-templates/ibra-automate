@@ -37,36 +37,50 @@ const stats = [
 
 export default function StatsSection() {
   const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true, amount: 0.3 })
+  const isInView = useInView(ref, { once: true, amount: 0.2 })
   const controls = useAnimation()
   const [counters, setCounters] = useState(stats.map(() => 0))
+  const hasAnimated = useRef(false)
+
+  const animateCounters = () => {
+    if (hasAnimated.current) return
+    hasAnimated.current = true
+    controls.start("visible")
+
+    stats.forEach((stat, index) => {
+      const finalValue = Number.parseInt(stat.value.replace(/\D/g, ""))
+      let current = 0
+      const increment = finalValue / 60
+
+      const timer = setInterval(() => {
+        current += increment
+        if (current >= finalValue) {
+          current = finalValue
+          clearInterval(timer)
+        }
+
+        setCounters((prev) => {
+          const newCounters = [...prev]
+          newCounters[index] = Math.floor(current)
+          return newCounters
+        })
+      }, 16)
+    })
+  }
 
   useEffect(() => {
     if (isInView) {
-      controls.start("visible")
-
-      // Animate counters
-      stats.forEach((stat, index) => {
-        const finalValue = Number.parseInt(stat.value.replace(/\D/g, ""))
-        let current = 0
-        const increment = finalValue / 60 // 60 frames for smooth animation
-
-        const timer = setInterval(() => {
-          current += increment
-          if (current >= finalValue) {
-            current = finalValue
-            clearInterval(timer)
-          }
-
-          setCounters((prev) => {
-            const newCounters = [...prev]
-            newCounters[index] = Math.floor(current)
-            return newCounters
-          })
-        }, 16) // ~60fps
-      })
+      animateCounters()
     }
-  }, [isInView, controls])
+  }, [isInView])
+
+  // Fallback: if IntersectionObserver doesn't trigger within 5s, animate anyway
+  useEffect(() => {
+    const fallback = setTimeout(() => {
+      animateCounters()
+    }, 5000)
+    return () => clearTimeout(fallback)
+  }, [])
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -89,7 +103,7 @@ export default function StatsSection() {
   }
 
   return (
-    <section className="py-20 relative">
+    <section id="stats" className="py-20 relative">
       <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-secondary/5"></div>
 
       <div className="container mx-auto px-4">
